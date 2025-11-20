@@ -4,6 +4,7 @@ import { screenBreakpoints } from "~/client/themes/screenBreakpoints";
 const Container = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
 
   background: var(--background-foreground);
@@ -12,8 +13,14 @@ const Container = styled.header`
   height: 60px;
   padding: 16px 24px;
 
-  img {
+  > img {
     height: 32px;
+  }
+
+  > .userImage {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
   }
 `;
 
