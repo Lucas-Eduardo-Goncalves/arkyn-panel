@@ -25,7 +25,7 @@ const SESSION_OPTIONS: SessionIdStorageStrategy["cookie"] = {
   path: "/",
   httpOnly: true,
   secrets: ["s3cr3t"],
-  secure: process.env.NODE_ENV === "production",
+  secure: false,
 };
 
 class AuthService {
