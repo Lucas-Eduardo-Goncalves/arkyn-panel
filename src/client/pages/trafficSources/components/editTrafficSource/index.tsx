@@ -9,7 +9,6 @@ import {
 } from "@arkyn/components";
 import { Form, useActionData, useNavigation } from "react-router";
 import { ModalContent } from "./styles";
-import { IdCard } from "lucide-react";
 
 function EditTrafficSource() {
   const { modalIsOpen, modalData, closeModal } = useModal(
