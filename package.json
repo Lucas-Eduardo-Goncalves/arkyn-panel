@@ -1,0 +1,44 @@
+{
+  "version": "1.0.0",
+  "name": "@arkyn/panel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "ccm": "./autocommit.sh",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@arkyn/components": "^3.0.1-beta.88",
+    "@arkyn/server": "^3.0.1-beta.88",
+    "@arkyn/shared": "^3.0.1-beta.88",
+    "@arkyn/templates": "^3.0.1-beta.88",
+    "@linaria/core": "^6.3.0",
+    "@linaria/react": "^6.3.0",
+    "@react-router/node": "^7.9.5",
+    "@react-router/serve": "^7.9.5",
+    "google-auth-library": "^10.5.0",
+    "isbot": "^5.1.32",
+    "lucide-react": "^0.514.0",
+    "nprogress": "^0.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router": "^7.9.5",
+    "zod": "4.0.17"
+  },
+  "devDependencies": {
+    "@arkyn/types": "^3.0.1-beta.12",
+    "@react-router/dev": "^7.9.5",
+    "@types/node": "^20.19.25",
+    "@types/nprogress": "^0.2.3",
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.3",
+    "@wyw-in-js/vite": "^0.7.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1",
+    "vite-plugin-devtools-json": "^0.2.1",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
