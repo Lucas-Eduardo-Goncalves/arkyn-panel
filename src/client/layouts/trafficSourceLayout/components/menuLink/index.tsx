@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 import { Container } from "./styles";
 
@@ -11,8 +11,16 @@ type MenuLinkProps = {
 };
 
 function MenuLink(arg: MenuLinkProps) {
-  const { children, to, icon: Icon } = arg;
+  const { children, to: rawTo, icon: Icon } = arg;
   const { pathname } = useLocation();
+
+  const params = useParams();
+
+  const trafficSourceId = params.trafficSourceId;
+  if (!trafficSourceId) throw new Error("trafficSourceId is required");
+
+  const baseUrl = `/traffic-sources/${params.trafficSourceId}`;
+  const to = baseUrl + rawTo;
 
   const isActive = pathname === to ? "active" : "";
 

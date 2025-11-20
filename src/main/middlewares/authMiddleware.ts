@@ -7,13 +7,13 @@ class AuthMiddleware {
   static async authenticate(route: RouteDTO) {
     const user = await AuthService.getAuthStorage(route);
     if (!user) throw RedirectServerAdapter.to("/sign-in");
-    return User.restore(user);
+    return user;
   }
 
   static async getUser(route: RouteDTO) {
     const user = await AuthService.getAuthStorage(route);
     if (!user) return null;
-    return User.restore(user);
+    return user;
   }
 
   static async logoutUser(route: RouteDTO) {

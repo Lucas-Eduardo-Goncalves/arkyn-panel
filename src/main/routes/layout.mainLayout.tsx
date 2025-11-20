@@ -6,7 +6,7 @@ import { RouteAdapter } from "~/infra/adapters/routeAdapter";
 export async function loader(args: Route.LoaderArgs) {
   const adaptedRoute = await RouteAdapter.adaptRoute(args);
   const user = await AuthMiddleware.authenticate(adaptedRoute);
-  return user.toJson();
+  return user;
 }
 
 export default MainLayout;

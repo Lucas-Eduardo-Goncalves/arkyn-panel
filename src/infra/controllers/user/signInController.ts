@@ -15,7 +15,11 @@ class SignInController {
     const data = schemaValidator.validate(body);
     const [user, token] = await this.signInUseCase.execute(data);
 
-    return await AuthService.setAuthStorage(route, { ...user, token }, "/home");
+    return await AuthService.setAuthStorage(
+      route,
+      { ...user, token },
+      "/traffic-sources"
+    );
   }
 }
 

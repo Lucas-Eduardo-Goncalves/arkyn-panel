@@ -10,6 +10,10 @@ export default [
   ]),
 
   layout("./main/routes/layout.mainLayout.tsx", [
-    route("home", "./main/routes/route.home.tsx"),
+    route("traffic-sources", "./main/routes/route.trafficSources.tsx"),
+  ]),
+
+  route("traffic-sources/:trafficSourceId", "./main/routes/layout.trafficSourceLayout.tsx", [
+    index("./main/routes/route.home.tsx"),
   ]),
 ] satisfies RouteConfig;
