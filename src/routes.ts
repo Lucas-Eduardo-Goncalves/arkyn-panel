@@ -15,5 +15,6 @@ export default [
 
   route("traffic-sources/:trafficSourceId", "./main/routes/layout.trafficSourceLayout.tsx", [
     index("./main/routes/route.home.tsx"),
+    route("domains", "./main/routes/route.domains.tsx"),
   ]),
 ] satisfies RouteConfig;
