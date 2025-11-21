@@ -42,7 +42,6 @@ class TrafficSource {
       id: this.id,
       name: this.name,
       trafficDomain: this.trafficDomain,
-      userId: this.userId,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };

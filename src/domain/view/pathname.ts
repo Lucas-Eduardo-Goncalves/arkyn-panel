@@ -1,33 +1,33 @@
-type DomainConstructorProps = {
+type PathnameConstructorProps = {
   id: string;
   value: string;
-  protocol: "https" | "http";
+  domainId: string;
   trafficSourceId: string;
   createdAt: string;
 };
 
-type DomainRestoreProps = DomainConstructorProps;
+type PathnameRestoreProps = PathnameConstructorProps;
 
-class Domain {
+class Pathname {
   id: string;
   value: string;
-  protocol: "https" | "http";
+  domainId: string;
   trafficSourceId: string;
   createdAt: string;
 
-  private constructor(props: DomainConstructorProps) {
+  private constructor(props: PathnameConstructorProps) {
     this.id = props.id;
     this.value = props.value;
-    this.protocol = props.protocol;
+    this.domainId = props.domainId;
     this.trafficSourceId = props.trafficSourceId;
     this.createdAt = props.createdAt;
   }
 
-  static restore(props: DomainRestoreProps): Domain {
-    return new Domain({
+  static restore(props: PathnameRestoreProps): Pathname {
+    return new Pathname({
       id: props.id,
       value: props.value,
-      protocol: props.protocol,
+      domainId: props.domainId,
       trafficSourceId: props.trafficSourceId,
       createdAt: props.createdAt,
     });
@@ -37,10 +37,9 @@ class Domain {
     return {
       id: this.id,
       value: this.value,
-      protocol: this.protocol,
       createdAt: this.createdAt,
     };
   }
 }
 
-export { Domain };
+export { Pathname };

@@ -6,14 +6,17 @@ type InputProps = {
   pageLimit?: number;
   sort?: string;
   sortDirection?: "asc" | "desc";
+  filter: {
+    trafficSourceId: string;
+  };
 };
 
 class ListDomainsUseCase {
-  constructor(private domainGateway: DomainDalDTO) {}
+  constructor(private domainDal: DomainDalDTO) {}
 
   async execute(input: InputProps, token: string) {
     const searchParams = new DomainSearchParams(input);
-    const domains = await this.domainGateway.listDomains(searchParams, token);
+    const domains = await this.domainDal.listDomains(searchParams, token);
     return domains.toJson();
   }
 }
