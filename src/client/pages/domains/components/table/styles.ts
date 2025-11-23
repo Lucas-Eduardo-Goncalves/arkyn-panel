@@ -11,6 +11,15 @@ const Container = styled.div`
   border: solid 1px var(--border);
   border-radius: 8px;
   background-color: var(--background-foreground);
+
+  p.code {
+    font-family: "Fira Code", monospace;
+    width: min-content;
+    white-space: nowrap;
+    background-color: var(--border);
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
 `;
 
 const CaptionContainer = styled(Form)`

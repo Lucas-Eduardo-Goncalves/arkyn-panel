@@ -1,4 +1,5 @@
 import {
+  Badge,
   Divider,
   IconButton,
   Input,
@@ -27,6 +28,11 @@ function Table() {
     navigate(url);
   }
 
+  const protocolsBadge = {
+    http: <Badge scheme="warning">HTTP</Badge>,
+    https: <Badge scheme="success">HTTPS</Badge>,
+  };
+
   return (
     <Container>
       <CaptionContainer>
@@ -53,8 +59,10 @@ function Table() {
         <TableBody emptyMessage="Empty table">
           {domains.data.map((domain) => (
             <tr key={domain.id}>
-              <td>{domain.value}</td>
-              <td>{domain.protocol}</td>
+              <td>
+                <p className="code">{domain.value}</p>
+              </td>
+              <td>{protocolsBadge[domain.protocol]}</td>
               <td>{domain.createdAt}</td>
               <td>
                 <IconButton

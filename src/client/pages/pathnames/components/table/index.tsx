@@ -4,6 +4,7 @@ import {
   TableBody,
   TableContainer,
   TableHeader,
+  Tooltip,
 } from "@arkyn/components";
 import { Search } from "lucide-react";
 import { useLoaderData } from "react-router";
@@ -34,7 +35,9 @@ function Table() {
         <TableBody emptyMessage="Empty table">
           {pathnames.data.map((pathname) => (
             <tr key={pathname.id}>
-              <td>{pathname.value}</td>
+              <td>
+                <p className="code">{pathname.value}</p>
+              </td>
               <td>{pathname.createdAt}</td>
             </tr>
           ))}
