@@ -15,6 +15,10 @@ const listTrafficSourcesSchema = paginationSchema.extend({
   sort: z.enum(["name", "createdAt", "updatedAt"]).optional(),
 });
 
+const listTrafficSourceByIdSchema = z.object({
+  trafficSourceId: z.uuid("Traffic source ID is required"),
+});
+
 const updateTrafficSourceSchema = z.object({
   id: z.uuid("Traffic source ID is required"),
   name: z.string().min(1, "Name is required"),
@@ -24,6 +28,7 @@ const updateTrafficSourceSchema = z.object({
 export {
   createTrafficSourceSchema,
   deleteTrafficSourceSchema,
+  listTrafficSourceByIdSchema,
   listTrafficSourcesSchema,
   updateTrafficSourceSchema,
 };

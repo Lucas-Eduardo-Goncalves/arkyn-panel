@@ -1,24 +1,18 @@
 import {
   Badge,
-  Divider,
   IconButton,
-  Input,
-  Select,
   TableBody,
   TableContainer,
   TableHeader,
 } from "@arkyn/components";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLoaderData, useNavigate, useParams } from "react-router";
 
 import type { DomainLoader } from "~/client/types/domainLoader";
-import { CaptionContainer, Container, FooterContainer } from "./styles";
+import { Container } from "./styles";
 
 function Table() {
   const { domains } = useLoaderData<DomainLoader>();
-
-  const page = domains.meta.page;
-  const lastPage = Math.ceil(domains.meta.totalItems / domains.meta.pageLimit);
 
   const params = useParams();
   const navigate = useNavigate();
@@ -35,19 +29,6 @@ function Table() {
 
   return (
     <Container>
-      <CaptionContainer>
-        <Input name="value" leftIcon={Search} placeholder="Search by value" />
-
-        <Select
-          name="protocol"
-          defaultValue="https"
-          options={[
-            { label: "https", value: "https" },
-            { label: "http", value: "http" },
-          ]}
-        />
-      </CaptionContainer>
-
       <TableContainer>
         <TableHeader>
           <th>Value</th>
@@ -76,14 +57,6 @@ function Table() {
           ))}
         </TableBody>
       </TableContainer>
-
-      <Divider />
-
-      <FooterContainer>
-        <p>
-          Showing {page} of {lastPage} pages
-        </p>
-      </FooterContainer>
     </Container>
   );
 }

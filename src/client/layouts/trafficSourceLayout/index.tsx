@@ -6,9 +6,9 @@ import { Container, Content } from "./styles";
 function TrafficSourceLayout() {
   return (
     <Container>
-      <Header />
+      <Menu />
       <Content>
-        <Menu />
+        <Header />
         <Outlet />
       </Content>
     </Container>

@@ -1,16 +1,8 @@
-import {
-  Divider,
-  Input,
-  TableBody,
-  TableContainer,
-  TableHeader,
-  Tooltip,
-} from "@arkyn/components";
-import { Search } from "lucide-react";
+import { TableBody, TableContainer, TableHeader } from "@arkyn/components";
 import { useLoaderData } from "react-router";
 
 import type { PathnameLoader } from "~/client/types/pathnameLoader";
-import { CaptionContainer, Container, FooterContainer } from "./styles";
+import { Container } from "./styles";
 
 function Table() {
   const { pathnames } = useLoaderData<PathnameLoader>();
@@ -22,10 +14,6 @@ function Table() {
 
   return (
     <Container>
-      <CaptionContainer>
-        <Input name="value" leftIcon={Search} placeholder="Search by value" />
-      </CaptionContainer>
-
       <TableContainer>
         <TableHeader>
           <th>Value</th>
@@ -43,14 +31,6 @@ function Table() {
           ))}
         </TableBody>
       </TableContainer>
-
-      <Divider />
-
-      <FooterContainer>
-        <p>
-          Showing {page} of {lastPage} pages
-        </p>
-      </FooterContainer>
     </Container>
   );
 }

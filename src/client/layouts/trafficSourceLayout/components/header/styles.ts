@@ -1,31 +1,49 @@
 import { styled } from "@linaria/react";
-import { screenBreakpoints } from "~/client/themes/screenBreakpoints";
 
 const Container = styled.header`
   display: flex;
-  align-items: center;
-  gap: 16px;
+  align-items: start;
+  justify-content: space-between;
 
-  background: var(--background-foreground);
-  border-bottom: 1px solid var(--border);
+  padding: 32px 32px 0 32px;
 
-  height: 60px;
-  padding: 16px 24px;
+  .informationArea {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
-  img {
-    height: 32px;
-  }
-`;
+    h1 {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 24px;
+      color: var(--text-heading);
+    }
 
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 8px;
+    .informationGroup {
+      display: flex;
+      gap: 16px;
 
-  ${screenBreakpoints.sm} {
-    .createAccount {
-      display: none;
+      .informationRow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        svg {
+          height: 14px;
+          width: 14px;
+
+          color: rgb(var(--spotlight-primary));
+        }
+
+        p {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0%;
+        }
+      }
     }
   }
 `;
 
-export { Container, ButtonGroup };
+export { Container };

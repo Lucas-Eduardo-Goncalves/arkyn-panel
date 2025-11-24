@@ -17,4 +17,8 @@ const externalTrafficSourcesSchema = z.object({
   meta: externalMetaSchema,
 });
 
-export { externalTrafficSourcesSchema, type ExternalTrafficSource };
+export {
+  externalTrafficSourcesSchema,
+  externalTrafficSourceSchema,
+  type ExternalTrafficSource,
+};

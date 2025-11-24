@@ -10,7 +10,10 @@ import { HttpAdapter } from "../adapters/httpAdapter";
 import { SchemaValidatorAdapter } from "../adapters/schemaValidatorAdapter";
 import { storeMicroservice } from "../http/store";
 import { TrafficSourceMapper } from "../mappers/trafficSource";
-import { externalTrafficSourcesSchema } from "../schemas/external/trafficSource";
+import {
+  externalTrafficSourceSchema,
+  externalTrafficSourcesSchema,
+} from "../schemas/external/trafficSource";
 
 class TrafficSourceGateway implements TrafficSourceGatewayDTO {
   async listTrafficSources(
@@ -40,6 +43,26 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
         totalItems: data.meta.totalItems,
       },
     });
+  }
+
+  async listById(
+    trafficSourceId: string,
+    token: string
+  ): Promise<TrafficSource> {
+    const apiResponse = await storeMicroservice.get(
+      `/traffic-sources/${trafficSourceId}`,
+      { token }
+    );
+
+    if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
+
+    const schemaValidator = new SchemaValidatorAdapter(
+      externalTrafficSourceSchema
+    );
+
+    const data = schemaValidator.validate(apiResponse.response);
+
+    return TrafficSourceMapper.toEntity(data);
   }
 
   async createTrafficSource(

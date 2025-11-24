@@ -2,8 +2,11 @@ import { Button, useAutomation } from "@arkyn/components";
 import { ArrowLeft } from "lucide-react";
 import { useActionData, useNavigate, useParams } from "react-router";
 
+import { LineTitle } from "~/client/components/lineTitle";
+import { Caption } from "./components/caption";
+import { Footer } from "./components/footer";
 import { Table } from "./components/table";
-import { Container, Header } from "./styles";
+import { Container } from "./styles";
 
 function PathnamesPage() {
   const actionData = useActionData();
@@ -18,13 +21,15 @@ function PathnamesPage() {
 
   return (
     <Container>
-      <Header>
-        <h1>Pathnames</h1>
+      <LineTitle title="Pathnames">
         <Button leftIcon={ArrowLeft} variant="outline" onClick={backToDomains}>
           Back to domains
         </Button>
-      </Header>
+      </LineTitle>
+
+      <Caption />
       <Table />
+      <Footer />
     </Container>
   );
 }

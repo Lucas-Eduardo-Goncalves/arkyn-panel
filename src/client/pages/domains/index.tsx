@@ -1,8 +1,11 @@
 import { useAutomation } from "@arkyn/components";
 import { useActionData } from "react-router";
 
+import { LineTitle } from "~/client/components/lineTitle";
+import { Caption } from "./components/caption";
+import { Footer } from "./components/footer";
 import { Table } from "./components/table";
-import { Container, Header } from "./styles";
+import { Container } from "./styles";
 
 function DomainsPage() {
   const actionData = useActionData();
@@ -10,10 +13,10 @@ function DomainsPage() {
 
   return (
     <Container>
-      <Header>
-        <h1>Domains</h1>
-      </Header>
+      <LineTitle title="Domains" />
+      <Caption />
       <Table />
+      <Footer />
     </Container>
   );
 }

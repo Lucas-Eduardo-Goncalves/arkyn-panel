@@ -19,6 +19,8 @@ type TrafficSourceGatewayDTO = {
     token: string
   ) => Promise<SearchResult<TrafficSource>>;
 
+  listById: (trafficSourceId: string, token: string) => Promise<TrafficSource>;
+
   createTrafficSource: (
     input: CreateTrafficSourceProps,
     token: string
