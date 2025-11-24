@@ -3,10 +3,8 @@ import { ValidateForgotPasswordTokenController } from "~/infra/controllers/user/
 import { UserGateway } from "~/infra/gateways/user";
 
 const userGateway = new UserGateway();
-
 const validateForgotPasswordTokenUseCase =
   new ValidateForgotPasswordTokenUseCase(userGateway);
-
 const validateForgotPasswordTokenController =
   new ValidateForgotPasswordTokenController(validateForgotPasswordTokenUseCase);
 

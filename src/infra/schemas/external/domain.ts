@@ -4,10 +4,10 @@ import { externalMetaSchema } from "./meta";
 type ExternalDomain = z.infer<typeof externalDomainSchema>;
 
 const externalDomainSchema = z.strictObject({
-  id: z.string(),
+  id: z.uuidv7(),
   value: z.string(),
   protocol: z.enum(["http", "https"]),
-  trafficSourceId: z.string(),
+  trafficSourceId: z.uuidv7(),
   createdAt: z.string(),
 });
 

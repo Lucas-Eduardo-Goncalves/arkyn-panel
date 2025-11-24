@@ -3,11 +3,9 @@ import { CreateTrafficSourceController } from "~/infra/controllers/trafficSource
 import { TrafficSourceGateway } from "~/infra/gateways/trafficSource";
 
 const trafficSourceGateway = new TrafficSourceGateway();
-
 const createTrafficSourceUseCase = new CreateTrafficSourceUseCase(
   trafficSourceGateway
 );
-
 const createTrafficSourceController = new CreateTrafficSourceController(
   createTrafficSourceUseCase
 );

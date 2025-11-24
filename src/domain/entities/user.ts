@@ -52,6 +52,7 @@ class User {
       avatarUrl: this.avatarUrl,
       email: this.email,
       utc: this.utc,
+      role: this.role,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };

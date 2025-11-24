@@ -4,10 +4,10 @@ import { externalMetaSchema } from "./meta";
 type ExternalPathname = z.infer<typeof externalPathnameSchema>;
 
 const externalPathnameSchema = z.strictObject({
-  id: z.string(),
+  id: z.uuidv7(),
   value: z.string(),
-  domainId: z.string(),
-  trafficSourceId: z.string(),
+  domainId: z.uuidv7(),
+  trafficSourceId: z.uuidv7(),
   createdAt: z.string(),
 });
 

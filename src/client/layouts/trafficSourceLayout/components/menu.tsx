@@ -1,4 +1,4 @@
-import { Activity, Globe, LayoutDashboard } from "lucide-react";
+import { Activity, Globe, LayoutDashboard, Webhook } from "lucide-react";
 import { MenuContainer } from "./menuContainer";
 import { MenuLink } from "./menuLink";
 
@@ -13,6 +13,9 @@ function Menu() {
       </MenuLink>
       <MenuLink to="/http-traffics" icon={Activity}>
         Http traffics
+      </MenuLink>
+      <MenuLink to="/webhooks" icon={Webhook}>
+        Webhooks
       </MenuLink>
     </MenuContainer>
   );
