@@ -16,6 +16,7 @@ export default [
       index("./main/routes/route.home.tsx"),
       route("domains", "./main/routes/route.domains.tsx"),
       route("domains/:domainId/pathnames", "./main/routes/route.pathnames.tsx"),
+      route("http-traffics", "./main/routes/route.httpTraffics.tsx"),
       route("webhooks", "./main/routes/route.webhooks.tsx"),
     ]),
   ]),

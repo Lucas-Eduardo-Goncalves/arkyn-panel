@@ -5,16 +5,15 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "ccm": "./autocommit.sh",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@arkyn/components": "^3.0.1-beta.88",
-    "@arkyn/server": "^3.0.1-beta.88",
-    "@arkyn/shared": "^3.0.1-beta.88",
-    "@arkyn/templates": "^3.0.1-beta.88",
+    "@arkyn/components": "^3.0.1-beta.91",
+    "@arkyn/server": "^3.0.1-beta.91",
+    "@arkyn/shared": "^3.0.1-beta.91",
+    "@arkyn/templates": "^3.0.1-beta.91",
     "@linaria/core": "^6.3.0",
     "@linaria/react": "^6.3.0",
     "@react-router/node": "^7.9.6",

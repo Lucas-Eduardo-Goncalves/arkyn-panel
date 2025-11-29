@@ -1,6 +1,6 @@
-import { Button, useAutomation } from "@arkyn/components";
+import { Button } from "@arkyn/components";
 import { ArrowLeft } from "lucide-react";
-import { useActionData, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { LineTitle } from "~/client/components/lineTitle";
 import { Caption } from "./components/caption";
@@ -9,9 +9,6 @@ import { Table } from "./components/table";
 import { Container } from "./styles";
 
 function PathnamesPage() {
-  const actionData = useActionData();
-  useAutomation(actionData);
-
   const params = useParams();
   const navigate = useNavigate();
 

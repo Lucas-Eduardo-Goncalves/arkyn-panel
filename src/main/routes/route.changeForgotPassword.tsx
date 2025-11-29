@@ -2,7 +2,7 @@ import type { Route } from "+/route.changeForgotPassword";
 import { ChangeForgotPasswordPage } from "~/client/pages/changeForgotPassword";
 import { ErrorHandlerAdapter } from "~/infra/adapters/errorHandlerAdapter";
 import { RouteAdapter } from "~/infra/adapters/routeAdapter";
-import { changeForgotPassword } from "../factories/admin/changeForgotPasswordFactory";
+import { changeForgotPassword } from "../factories/user/changeForgotPasswordFactory";
 
 export async function action(props: Route.ActionArgs) {
   try {

@@ -7,11 +7,6 @@ import { Container } from "./styles";
 function Table() {
   const { pathnames } = useLoaderData<PathnameLoader>();
 
-  const page = pathnames.meta.page;
-  const lastPage = Math.ceil(
-    pathnames.meta.totalItems / pathnames.meta.pageLimit
-  );
-
   return (
     <Container>
       <TableContainer>

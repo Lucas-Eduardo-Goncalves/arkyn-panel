@@ -4,10 +4,10 @@ import { Footer } from "./components/footer";
 import { Table } from "./components/table";
 import { Container } from "./styles";
 
-function DomainsPage() {
+function HttpTrafficsPage() {
   return (
     <Container>
-      <LineTitle title="Domains" />
+      <LineTitle title="Http traffics" />
       <Caption />
       <Table />
       <Footer />
@@ -15,4 +15,4 @@ function DomainsPage() {
   );
 }
 
-export { DomainsPage };
+export { HttpTrafficsPage };
