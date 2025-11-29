@@ -1,6 +1,7 @@
 import { LineTitle } from "~/client/components/lineTitle";
 import { Caption } from "./components/caption";
 import { Footer } from "./components/footer";
+import { HttpTrafficRecord } from "./components/httpTrafficRecord";
 import { Table } from "./components/table";
 import { Container } from "./styles";
 
@@ -11,6 +12,7 @@ function HttpTrafficsPage() {
       <Caption />
       <Table />
       <Footer />
+      <HttpTrafficRecord />
     </Container>
   );
 }
