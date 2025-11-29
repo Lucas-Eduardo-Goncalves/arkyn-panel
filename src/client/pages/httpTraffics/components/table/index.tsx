@@ -15,8 +15,8 @@ function Table() {
     <Container>
       <TableContainer>
         <TableHeader>
-          <th>Status</th>
           <th>Method</th>
+          <th>Status</th>
           <th>Level</th>
           <th>Elapsed time</th>
           <th>Created at</th>
@@ -25,8 +25,8 @@ function Table() {
         <TableBody emptyMessage="Empty table">
           {httpTraffics.data.map((httpTraffic) => (
             <tr key={httpTraffic.id}>
-              <td>{statusBadge(httpTraffic.status)}</td>
               <td>{methodBadge[httpTraffic.method]}</td>
+              <td>{statusBadge(httpTraffic.status)}</td>
               <td>{levelBadge[httpTraffic.level]}</td>
               <td>{convertMsToTime(httpTraffic.elapsedTime)}</td>
               <td>{httpTraffic.createdAt}</td>
