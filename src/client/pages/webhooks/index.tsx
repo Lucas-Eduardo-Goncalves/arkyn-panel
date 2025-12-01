@@ -19,7 +19,7 @@ function WebhooksPage() {
     <>
       <Container>
         <LineTitle title="Webhooks">
-          <Button leftIcon={Plus} onClick={openModal}>
+          <Button size="sm" leftIcon={Plus} onClick={openModal}>
             Add webhook
           </Button>
         </LineTitle>
