@@ -18,14 +18,10 @@ class PathnameDal implements PathnameDalDTO {
     url += `/${searchParams.filter?.domainId}`;
     url += searchParams.toExternal(["trafficSourceId", "domainId"]);
 
-    const apiResponse = await storeMicroservice.get(url, {
-      token,
-    });
-
+    const apiResponse = await storeMicroservice.get(url, { token });
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
 
     const schemaValidator = new SchemaValidatorAdapter(externalPathnamesSchema);
-
     const data = schemaValidator.validate(apiResponse.response);
 
     return new SearchResult({

@@ -17,10 +17,7 @@ class HttpTrafficDal implements HttpTrafficDalDTO {
     url += `/${searchParams.filter?.trafficSourceId}`;
     url += searchParams.toExternal(["trafficSourceId"]);
 
-    const apiResponse = await storeMicroservice.get(url, {
-      token,
-    });
-
+    const apiResponse = await storeMicroservice.get(url, { token });
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
 
     const schemaValidator = new SchemaValidatorAdapter(

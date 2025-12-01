@@ -57,6 +57,7 @@ class SearchParams<Filter extends Record<string, any>> {
 
     if (this._filter) {
       for (const [key, value] of Object.entries(this._filter)) {
+        if (value === null || value === undefined || value === "") continue;
         if (unusableFilters?.includes(key)) continue;
         urlSearchParams.set(key, String(value));
       }

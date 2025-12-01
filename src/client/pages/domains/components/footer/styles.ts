@@ -1,7 +1,6 @@
 import { styled } from "@linaria/react";
-import { Form } from "react-router";
 
-const Container = styled(Form)`
+const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

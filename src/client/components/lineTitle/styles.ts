@@ -3,7 +3,7 @@ import { styled } from "@linaria/react";
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
 
   > strong {
     position: relative;
@@ -11,6 +11,7 @@ const Container = styled.div`
     font-size: 20px;
     line-height: 20px;
     color: var(--text-heading);
+    margin-right: auto;
 
     &::before {
       content: " ";

@@ -23,10 +23,7 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
     let url = "/traffic-sources";
     url += searchParams.toExternal();
 
-    const apiResponse = await storeMicroservice.get(url, {
-      token,
-    });
-
+    const apiResponse = await storeMicroservice.get(url, { token });
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
 
     const schemaValidator = new SchemaValidatorAdapter(
@@ -49,11 +46,9 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
     trafficSourceId: string,
     token: string
   ): Promise<TrafficSource> {
-    const apiResponse = await storeMicroservice.get(
-      `/traffic-sources/${trafficSourceId}`,
-      { token }
-    );
+    const url = `/traffic-sources/${trafficSourceId}`;
 
+    const apiResponse = await storeMicroservice.get(url, { token });
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
 
     const schemaValidator = new SchemaValidatorAdapter(
@@ -61,7 +56,6 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
     );
 
     const data = schemaValidator.validate(apiResponse.response);
-
     return TrafficSourceMapper.toEntity(data);
   }
 
@@ -69,11 +63,8 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
     body: CreateTrafficSourceProps,
     token: string
   ): Promise<void> {
-    const apiResponse = await storeMicroservice.post("/traffic-sources", {
-      body,
-      token,
-    });
-
+    const url = `/traffic-sources`;
+    const apiResponse = await storeMicroservice.post(url, { body, token });
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
   }
 
@@ -81,20 +72,14 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
     { id, ...body }: UpdateTrafficSourceProps,
     token: string
   ): Promise<void> {
-    const apiResponse = await storeMicroservice.put(`/traffic-sources/${id}`, {
-      body,
-      token,
-    });
-
+    const url = `/traffic-sources/${id}`;
+    const apiResponse = await storeMicroservice.put(url, { body, token });
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
   }
 
   async deleteTrafficSource(id: string, token: string): Promise<void> {
-    const apiResponse = await storeMicroservice.delete(
-      `/traffic-sources/${id}`,
-      { token }
-    );
-
+    const url = `/traffic-sources/${id}`;
+    const apiResponse = await storeMicroservice.delete(url, { token });
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
   }
 }
