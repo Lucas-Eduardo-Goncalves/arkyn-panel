@@ -10,10 +10,10 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@arkyn/components": "^3.0.1-beta.91",
-    "@arkyn/server": "^3.0.1-beta.91",
-    "@arkyn/shared": "^3.0.1-beta.91",
-    "@arkyn/templates": "^3.0.1-beta.91",
+    "@arkyn/components": "^3.0.1-beta.93",
+    "@arkyn/server": "^3.0.1-beta.93",
+    "@arkyn/shared": "^3.0.1-beta.93",
+    "@arkyn/templates": "^3.0.1-beta.93",
     "@linaria/core": "^6.3.0",
     "@linaria/react": "^6.3.0",
     "@react-router/node": "^7.9.6",
