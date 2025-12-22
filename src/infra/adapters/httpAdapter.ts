@@ -8,6 +8,9 @@ import {
   Unauthorized,
   UnprocessableEntity,
   NotImplemented,
+  Created,
+  Updated,
+  Success,
 } from "@arkyn/server";
 
 DebugService.setIgnoreFile("httpAdapter.ts");
@@ -50,6 +53,18 @@ class HttpAdapter {
 
   static unprocessableEntity(props: UnprocessableEntityProps) {
     throw new UnprocessableEntity(props);
+  }
+
+  static created(message: string, body?: any) {
+    return new Created({ closeModal: true, ...body }, { message }).toResponse();
+  }
+
+  static updated(message: string, body?: any) {
+    return new Updated({ closeModal: true, ...body }, { message }).toResponse();
+  }
+
+  static success(message: string, body?: any) {
+    return new Success({ closeModal: true, ...body }, { message }).toResponse();
   }
 }
 

@@ -1,4 +1,5 @@
 import {
+  Divider,
   DrawerContainer,
   DrawerHeader,
   TabButton,
@@ -9,54 +10,45 @@ import { useState } from "react";
 import { useLoaderData, useLocation, useNavigate } from "react-router";
 
 import type { HttpTrafficLoader } from "~/client/types/httpTrafficLoader";
-import { DrawerContent, HeadersContainer } from "./styles";
+import { DetailsView } from "../detailsTable";
+import { HeadersView } from "../headersView";
+import { JsonView } from "../jsonView";
+import { DrawerContent } from "./styles";
 
-function RequestContent() {
+function Request() {
   const { httpTrafficRecord } = useLoaderData<HttpTrafficLoader>();
-  if (!httpTrafficRecord) return <></>;
+  if (!httpTrafficRecord?.request) return null;
 
-  const headers = Object.entries(JSON.parse(httpTrafficRecord.request.headers));
+  const { bodyPreview, headers, queryParams } = httpTrafficRecord.request;
 
   return (
     <>
-      <HeadersContainer>
-        <strong>Headers</strong>
-        {headers.map(([key, value]) => (
-          <div key={key}>
-            <p>{key}</p>
-            <p>{String(value)}</p>
-          </div>
-        ))}
-      </HeadersContainer>
+      <HeadersView title="Request headers" data={headers} />
+      <Divider />
+      <JsonView title="Request params" data={queryParams} />
+      <Divider />
+      <JsonView title="Request body" data={bodyPreview} />
     </>
   );
 }
 
-function ResponseContent() {
+function Response() {
   const { httpTrafficRecord } = useLoaderData<HttpTrafficLoader>();
-  if (!httpTrafficRecord) return <></>;
+  if (!httpTrafficRecord?.response) return null;
 
-  const headers = Object.entries(
-    JSON.parse(httpTrafficRecord.response.headers)
-  );
-
+  const { bodyPreview, headers } = httpTrafficRecord.response;
   return (
     <>
-      <HeadersContainer>
-        <strong>Headers</strong>
-        {headers.map(([key, value]) => (
-          <div key={key}>
-            <p>{key}</p>
-            <p>{String(value)}</p>
-          </div>
-        ))}
-      </HeadersContainer>
+      <HeadersView title="Response headers" data={headers} />
+      <Divider />
+      <JsonView title="Response body" data={bodyPreview} />
     </>
   );
 }
 
 function HttpTrafficRecord() {
   const { httpTrafficRecord } = useLoaderData<HttpTrafficLoader>();
+  const [tab, setTab] = useState("request");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -66,8 +58,6 @@ function HttpTrafficRecord() {
     navigate(scopedParams.getScopedSearch({ httpTrafficId: undefined }));
   }
 
-  const [tab, setTab] = useState("request");
-
   return (
     <DrawerContainer
       orientation="right"
@@ -76,13 +66,11 @@ function HttpTrafficRecord() {
     >
       <DrawerHeader>Http traffic record</DrawerHeader>
       <DrawerContent>
-        <TabContainer defaultValue={tab} onChange={setTab}>
-          <TabButton value="request">Request</TabButton>
-          <TabButton value="response">Response</TabButton>
-        </TabContainer>
-
-        {tab === "request" && <RequestContent />}
-        {tab === "response" && <ResponseContent />}
+        <DetailsView />
+        <Divider />
+        <Request />
+        <Divider />
+        <Response />
       </DrawerContent>
     </DrawerContainer>
   );
