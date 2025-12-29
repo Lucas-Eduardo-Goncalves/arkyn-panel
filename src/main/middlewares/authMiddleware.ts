@@ -1,13 +1,16 @@
 import { RedirectServerAdapter } from "~/infra/adapters/redirectServerAdapter";
 import { AuthService } from "~/infra/services/authService";
 import type { RouteDTO } from "../types/route";
-import { User } from "~/domain/entities/user";
 
 class AuthMiddleware {
   static async authenticate(route: RouteDTO) {
     const user = await AuthService.getAuthStorage(route);
-    if (!user) throw RedirectServerAdapter.to("/sign-in");
-    return user;
+    const refundTo = route.request.url;
+
+    if (user) return user;
+
+    const url = `/sign-in?refundTo=${encodeURIComponent(refundTo)}`;
+    throw RedirectServerAdapter.to(url);
   }
 
   static async getUser(route: RouteDTO) {
