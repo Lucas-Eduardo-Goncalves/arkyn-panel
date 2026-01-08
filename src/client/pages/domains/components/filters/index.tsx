@@ -8,15 +8,21 @@ import {
   useScopedParams,
 } from "@arkyn/components";
 import { Search } from "lucide-react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { DrawerContent } from "./styles";
 
 function Filters() {
   const { drawerIsOpen, closeDrawer } = useDrawer("domain-filters-drawer");
 
+  const navigate = useNavigate();
   const location = useLocation();
   const scopedParams = useScopedParams(location.search);
+
+  function handleClearFilters() {
+    navigate(location.pathname);
+    closeDrawer();
+  }
 
   return (
     <DrawerContainer
@@ -31,13 +37,13 @@ function Filters() {
           name="value"
           leftIcon={Search}
           placeholder="Write here..."
-          defaultValue={scopedParams.getParam("value")}
+          defaultValue={scopedParams.getParam("value") || ""}
         />
 
         <Select
           label="Protocol:"
           name="protocol"
-          defaultValue={scopedParams.getParam("protocol") || "https"}
+          defaultValue={scopedParams.getParam("protocol") || ""}
           options={[
             { label: "https", value: "https" },
             { label: "http", value: "http" },
@@ -78,7 +84,19 @@ function Filters() {
           ]}
         />
 
-        <Button onClick={closeDrawer}>Apply</Button>
+        <div className="buttonsGroup">
+          <Button onClick={closeDrawer}>Apply</Button>
+          {location.search && (
+            <Button
+              variant="ghost"
+              scheme="danger"
+              type="button"
+              onClick={handleClearFilters}
+            >
+              Clear filters
+            </Button>
+          )}
+        </div>
       </DrawerContent>
     </DrawerContainer>
   );

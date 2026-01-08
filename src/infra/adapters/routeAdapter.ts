@@ -6,12 +6,20 @@ class RouteAdapter {
     request,
   }: LoaderFunctionArgs | ActionFunctionArgs) {
     const url = new URL(request.url);
-    const query = Object.fromEntries(url.searchParams.entries());
+
+    const query: [string, string][] = [];
+
+    url.searchParams.forEach((value, key) => {
+      if (value === null) return;
+      if (value === undefined) return;
+      if (value.trim() === "") return;
+      query.push([key, value]);
+    });
 
     return {
       request: request,
       params: params as Record<string, string>,
-      query,
+      query: Object.fromEntries(query),
     };
   }
 }

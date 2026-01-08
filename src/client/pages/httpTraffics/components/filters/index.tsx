@@ -2,13 +2,11 @@ import {
   Button,
   DrawerContainer,
   DrawerHeader,
-  Input,
   Select,
   useDrawer,
   useScopedParams,
 } from "@arkyn/components";
-import { Search } from "lucide-react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { DrawerContent } from "./styles";
 
@@ -17,8 +15,14 @@ function Filters() {
     "http-traffic-filters-drawer"
   );
 
+  const navigate = useNavigate();
   const location = useLocation();
   const scopedParams = useScopedParams(location.search);
+
+  function handleClearFilters() {
+    navigate(location.pathname);
+    closeDrawer();
+  }
 
   return (
     <DrawerContainer
@@ -28,6 +32,56 @@ function Filters() {
     >
       <DrawerHeader>Filter domains:</DrawerHeader>
       <DrawerContent method="get">
+        {/* <Input
+          label="Log identifier:"
+          name="id"
+          defaultValue={scopedParams.getParam("id") || ""}
+        /> */}
+
+        <Select
+          label="Status:"
+          name="status"
+          isSearchable
+          defaultValue={scopedParams.getParam("status") || ""}
+          options={[
+            { label: "200 - OK", value: "200" },
+            { label: "201 - Created", value: "201" },
+            { label: "204 - No Content", value: "204" },
+            { label: "400 - Bad Request", value: "400" },
+            { label: "401 - Unauthorized", value: "401" },
+            { label: "403 - Forbidden", value: "403" },
+            { label: "404 - Not Found", value: "404" },
+            { label: "500 - Internal Server Error", value: "500" },
+            { label: "502 - Bad Gateway", value: "502" },
+            { label: "503 - Service Unavailable", value: "503" },
+            { label: "504 - Gateway Timeout", value: "504" },
+          ]}
+        />
+
+        <Select
+          label="Method:"
+          name="method"
+          defaultValue={scopedParams.getParam("method") || ""}
+          options={[
+            { label: "post", value: "post" },
+            { label: "get", value: "get" },
+            { label: "put", value: "put" },
+            { label: "delete", value: "delete" },
+            { label: "patch", value: "patch" },
+          ]}
+        />
+
+        {/* <Select
+          label="Level:"
+          name="level"
+          defaultValue={scopedParams.getParam("level") || ""}
+          options={[
+            { label: "Info", value: "info" },
+            { label: "Warning", value: "warning" },
+            { label: "Fatal", value: "fatal" },
+          ]}
+        /> */}
+
         <Select
           label="Items per page:"
           name="pageLimit"
@@ -62,7 +116,19 @@ function Filters() {
           ]}
         />
 
-        <Button onClick={closeDrawer}>Apply</Button>
+        <div className="buttonsGroup">
+          <Button onClick={closeDrawer}>Apply</Button>
+          {location.search && (
+            <Button
+              variant="ghost"
+              scheme="danger"
+              type="button"
+              onClick={handleClearFilters}
+            >
+              Clear filters
+            </Button>
+          )}
+        </div>
       </DrawerContent>
     </DrawerContainer>
   );

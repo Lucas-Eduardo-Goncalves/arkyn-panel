@@ -8,16 +8,21 @@ import {
   useScopedParams,
 } from "@arkyn/components";
 import { Search } from "lucide-react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { DrawerContent } from "./styles";
 
 function Filters() {
   const { drawerIsOpen, closeDrawer } = useDrawer("pathname-filters-drawer");
 
+  const navigate = useNavigate();
   const location = useLocation();
   const scopedParams = useScopedParams(location.search);
 
+  function handleClearFilters() {
+    navigate(location.pathname);
+    closeDrawer();
+  }
   return (
     <DrawerContainer
       isVisible={drawerIsOpen}
@@ -31,7 +36,7 @@ function Filters() {
           name="value"
           leftIcon={Search}
           placeholder="Write here..."
-          defaultValue={scopedParams.getParam("value")}
+          defaultValue={scopedParams.getParam("value") || ""}
         />
 
         <Select
@@ -39,7 +44,6 @@ function Filters() {
           name="pageLimit"
           defaultValue={scopedParams.getParam("pageLimit") || "10"}
           options={[
-            { label: "1", value: "1" },
             { label: "10", value: "10" },
             { label: "20", value: "20" },
             { label: "50", value: "50" },
@@ -68,7 +72,19 @@ function Filters() {
           ]}
         />
 
-        <Button onClick={closeDrawer}>Apply</Button>
+        <div className="buttonsGroup">
+          <Button onClick={closeDrawer}>Apply</Button>
+          {location.search && (
+            <Button
+              variant="ghost"
+              scheme="danger"
+              type="button"
+              onClick={handleClearFilters}
+            >
+              Clear filters
+            </Button>
+          )}
+        </div>
       </DrawerContent>
     </DrawerContainer>
   );

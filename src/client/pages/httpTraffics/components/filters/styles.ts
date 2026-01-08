@@ -10,8 +10,11 @@ const DrawerContent = styled(Form)`
 
   height: 100%;
 
-  .arkynButton {
+  .buttonsGroup {
+    display: flex;
+    flex-direction: column;
     margin-top: auto;
+    gap: 8px;
   }
 `;
 
