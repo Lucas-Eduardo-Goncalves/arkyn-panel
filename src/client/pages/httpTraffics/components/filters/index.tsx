@@ -30,7 +30,7 @@ function Filters() {
       makeInvisible={closeDrawer}
       orientation="right"
     >
-      <DrawerHeader>Filter domains:</DrawerHeader>
+      <DrawerHeader>Filter http traffics:</DrawerHeader>
       <DrawerContent method="get">
         {/* <Input
           label="Log identifier:"

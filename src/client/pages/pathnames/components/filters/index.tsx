@@ -29,7 +29,7 @@ function Filters() {
       makeInvisible={closeDrawer}
       orientation="right"
     >
-      <DrawerHeader>Filter domains:</DrawerHeader>
+      <DrawerHeader>Filter pathnames:</DrawerHeader>
       <DrawerContent method="get">
         <Input
           label="Value:"
