@@ -2,6 +2,7 @@ import {
   Button,
   DrawerContainer,
   DrawerHeader,
+  Input,
   Select,
   useDrawer,
   useScopedParams,
@@ -32,11 +33,11 @@ function Filters() {
     >
       <DrawerHeader>Filter http traffics:</DrawerHeader>
       <DrawerContent method="get">
-        {/* <Input
+        <Input
           label="Log identifier:"
           name="id"
           defaultValue={scopedParams.getParam("id") || ""}
-        /> */}
+        />
 
         <Select
           label="Status:"
@@ -71,7 +72,7 @@ function Filters() {
           ]}
         />
 
-        {/* <Select
+        <Select
           label="Level:"
           name="level"
           defaultValue={scopedParams.getParam("level") || ""}
@@ -80,7 +81,7 @@ function Filters() {
             { label: "Warning", value: "warning" },
             { label: "Fatal", value: "fatal" },
           ]}
-        /> */}
+        />
 
         <Select
           label="Items per page:"
