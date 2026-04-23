@@ -8,6 +8,7 @@ import { Container } from "./styles";
 type CardProps = {
   id: string;
   name: string;
+  fullName: string;
   trafficDomain: string;
   createdAt: string;
 };

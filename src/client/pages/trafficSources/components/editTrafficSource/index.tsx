@@ -12,7 +12,7 @@ import { ModalContent } from "./styles";
 
 function EditTrafficSource() {
   const { modalIsOpen, modalData, closeModal } = useModal(
-    "edit-traffic-source"
+    "edit-traffic-source",
   );
 
   const actionData = useActionData();
@@ -40,7 +40,7 @@ function EditTrafficSource() {
             label="Name:"
             placeholder="Write here..."
             showAsterisk
-            defaultValue={modalData?.name}
+            defaultValue={modalData?.fullName}
           />
 
           <Input

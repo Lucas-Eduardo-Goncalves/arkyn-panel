@@ -17,6 +17,9 @@ function TrafficSourcesPage() {
 
   const { trafficSources } = useLoaderData<TrafficSourceLoader>();
 
+  type TrafficSource = (typeof trafficSources.data)[number];
+  type TrafficSourceWithFullName = TrafficSource & { fullName: string };
+
   const groupedSources = trafficSources.data.reduce(
     (acc, trafficSource) => {
       const match = trafficSource.name.match(/\*\*(.*?)\*\*/);
@@ -26,11 +29,12 @@ function TrafficSourcesPage() {
       acc[categoryName].push({
         ...trafficSource,
         name: trafficSource.name.replace(/\*\*(.*?)\*\*/, "").trim(),
+        fullName: trafficSource.name,
       });
 
       return acc;
     },
-    {} as Record<string, typeof trafficSources.data>,
+    {} as Record<string, TrafficSourceWithFullName[]>,
   );
 
   const entriesSources = Object.entries(groupedSources);
@@ -40,23 +44,27 @@ function TrafficSourcesPage() {
       <Container>
         <Header />
 
-        {entriesSources.map(([category, trafficSources]) => (
-          <GridContainer>
-            <h2>{category}</h2>
-
-            <Divider />
-
-            {trafficSources.map((trafficSource) => (
-              <Card
-                key={trafficSource.id}
-                id={trafficSource.id}
-                createdAt={trafficSource.createdAt}
-                name={trafficSource.name}
-                trafficDomain={trafficSource.trafficDomain}
-              />
-            ))}
-          </GridContainer>
-        ))}
+        {entriesSources
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .map(([category, trafficSources]) => (
+            <GridContainer>
+              <h2>{category}</h2>
+              <Divider />
+              {trafficSources
+                .slice()
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((trafficSource) => (
+                  <Card
+                    key={trafficSource.id}
+                    id={trafficSource.id}
+                    createdAt={trafficSource.createdAt}
+                    name={trafficSource.name}
+                    fullName={trafficSource.fullName}
+                    trafficDomain={trafficSource.trafficDomain}
+                  />
+                ))}
+            </GridContainer>
+          ))}
       </Container>
 
       <CreateTrafficSource />
