@@ -60,6 +60,7 @@ function TrafficSourcesPage() {
                     createdAt={trafficSource.createdAt}
                     name={trafficSource.name}
                     fullName={trafficSource.fullName}
+                    userOwnerId={trafficSource.userId}
                     trafficDomain={trafficSource.trafficDomain}
                   />
                 ))}

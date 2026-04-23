@@ -1,14 +1,22 @@
-import { Button, Divider, IconButton, useModal } from "@arkyn/components";
-import { PenLine, Trash2 } from "lucide-react";
+import {
+  Button,
+  Divider,
+  IconButton,
+  Tooltip,
+  useModal,
+} from "@arkyn/components";
+import { AlertCircle, PenLine, Trash2 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 
 import { DomainStatus } from "../../utilities/domainStatus";
 import { Container } from "./styles";
+import { useLayout } from "~/client/hooks/useLayout";
 
 type CardProps = {
   id: string;
   name: string;
   fullName: string;
+  userOwnerId: string;
   trafficDomain: string;
   createdAt: string;
 };
@@ -16,6 +24,7 @@ type CardProps = {
 function Card(props: CardProps) {
   const { openModal } = useModal();
   const navigate = useNavigate();
+  const { user } = useLayout();
 
   function handleViewDetails(trafficSourceId: string) {
     navigate(`/traffic-sources/${trafficSourceId}`);
@@ -34,14 +43,14 @@ function Card(props: CardProps) {
 
       <div className="stats">
         <div>
-          <strong className="success">432</strong>
+          <strong className="success">--</strong>
           <p>Http traffics</p>
         </div>
 
         <Divider orientation="vertical" />
 
         <div>
-          <strong className="danger">19</strong>
+          <strong className="danger">--</strong>
           <p>Fatal errors</p>
         </div>
       </div>
@@ -51,23 +60,44 @@ function Card(props: CardProps) {
       <div className="buttons">
         <DomainStatus domain={props.trafficDomain} />
 
-        <IconButton
-          aria-label="Delete traffic source"
-          variant="outline"
-          scheme="danger"
-          icon={Trash2}
-          size="sm"
-          onClick={() => openModal("delete-traffic-source", { id: props.id })}
-        />
+        {user.id === props.userOwnerId && (
+          <>
+            <IconButton
+              aria-label="Delete traffic source"
+              variant="outline"
+              scheme="danger"
+              icon={Trash2}
+              size="sm"
+              onClick={() =>
+                openModal("delete-traffic-source", { id: props.id })
+              }
+            />
 
-        <IconButton
-          aria-label="Edit traffic source"
-          variant="outline"
-          scheme="warning"
-          icon={PenLine}
-          size="sm"
-          onClick={() => openModal("edit-traffic-source", props)}
-        />
+            <IconButton
+              aria-label="Edit traffic source"
+              variant="outline"
+              scheme="warning"
+              icon={PenLine}
+              size="sm"
+              onClick={() => openModal("edit-traffic-source", props)}
+            />
+          </>
+        )}
+
+        {user.id !== props.userOwnerId && (
+          <Tooltip
+            orientation="right"
+            text="This traffic source belongs to another user, you can't edit or delete it."
+          >
+            <IconButton
+              aria-label="Information about permissions"
+              variant="invisible"
+              scheme="info"
+              icon={AlertCircle}
+              size="sm"
+            />
+          </Tooltip>
+        )}
 
         <Button
           variant="outline"

@@ -41,6 +41,7 @@ class TrafficSource {
     return {
       id: this.id,
       name: this.name,
+      userId: this.userId,
       trafficDomain: this.trafficDomain,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
