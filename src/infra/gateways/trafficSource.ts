@@ -18,7 +18,7 @@ import {
 class TrafficSourceGateway implements TrafficSourceGatewayDTO {
   async listTrafficSources(
     searchParams: TrafficSourceSearchParams,
-    token: string
+    token: string,
   ): Promise<SearchResult<TrafficSource>> {
     let url = "/traffic-sources";
     url += searchParams.toExternal();
@@ -27,7 +27,7 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
 
     const schemaValidator = new SchemaValidatorAdapter(
-      externalTrafficSourcesSchema
+      externalTrafficSourcesSchema,
     );
 
     const data = schemaValidator.validate(apiResponse.response);
@@ -44,7 +44,7 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
 
   async listById(
     trafficSourceId: string,
-    token: string
+    token: string,
   ): Promise<TrafficSource> {
     const url = `/traffic-sources/${trafficSourceId}`;
 
@@ -52,7 +52,7 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
 
     const schemaValidator = new SchemaValidatorAdapter(
-      externalTrafficSourceSchema
+      externalTrafficSourceSchema,
     );
 
     const data = schemaValidator.validate(apiResponse.response);
@@ -61,7 +61,7 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
 
   async createTrafficSource(
     body: CreateTrafficSourceProps,
-    token: string
+    token: string,
   ): Promise<void> {
     const url = `/traffic-sources`;
     const apiResponse = await storeMicroservice.post(url, { body, token });
@@ -70,7 +70,7 @@ class TrafficSourceGateway implements TrafficSourceGatewayDTO {
 
   async updateTrafficSource(
     { id, ...body }: UpdateTrafficSourceProps,
-    token: string
+    token: string,
   ): Promise<void> {
     const url = `/traffic-sources/${id}`;
     const apiResponse = await storeMicroservice.put(url, { body, token });

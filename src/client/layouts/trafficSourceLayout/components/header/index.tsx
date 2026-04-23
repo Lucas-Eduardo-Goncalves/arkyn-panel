@@ -16,7 +16,11 @@ function Header() {
   return (
     <Container>
       <div className="informationArea">
-        <h1>{loaderData.trafficSource.name}</h1>
+        <h1>
+          {loaderData.trafficSource.name
+            .replaceAll("**", " |")
+            .replace(" |", "")}
+        </h1>
 
         <div className="informationGroup">
           <div className="informationRow">

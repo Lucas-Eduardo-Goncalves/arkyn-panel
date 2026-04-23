@@ -9,16 +9,15 @@ import { SchemaValidatorAdapter } from "../adapters/schemaValidatorAdapter";
 import { storeMicroservice } from "../http/store";
 import { WebhookMapper } from "../mappers/webhook";
 import { externalWebhooksSchema } from "../schemas/external/webhook";
-import type { id } from "zod/locales";
 
 class WebhookGateway implements WebhookGatewayDTO {
   async listWebhooks(
     trafficSourceId: string,
-    token: string
+    token: string,
   ): Promise<Webhook[]> {
     const apiResponse = await storeMicroservice.get(
       `/webhooks/${trafficSourceId}`,
-      { token }
+      { token },
     );
 
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
@@ -34,16 +33,16 @@ class WebhookGateway implements WebhookGatewayDTO {
 
     const apiResponse = await storeMicroservice.post(
       `/webhooks/${trafficSourceId}`,
-      { body, token }
+      { body, token },
     );
 
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
   }
 
   async updateWebhook(input: UpdateWebhookProps, token: string): Promise<void> {
-    const { id, ...body } = input;
+    const { id: webhookId, ...body } = input;
 
-    const apiResponse = await storeMicroservice.put(`/webhooks/${id}`, {
+    const apiResponse = await storeMicroservice.put(`/webhooks/${webhookId}`, {
       body,
       token,
     });
@@ -51,10 +50,11 @@ class WebhookGateway implements WebhookGatewayDTO {
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
   }
 
-  async deleteWebhook(id: string, token: string): Promise<void> {
-    const apiResponse = await storeMicroservice.delete(`/webhooks/${id}`, {
-      token,
-    });
+  async deleteWebhook(webhookId: string, token: string): Promise<void> {
+    const apiResponse = await storeMicroservice.delete(
+      `/webhooks/${webhookId}`,
+      { token },
+    );
 
     if (!apiResponse.success) throw HttpAdapter.badRequest(apiResponse.message);
   }
