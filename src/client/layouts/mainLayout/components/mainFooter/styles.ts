@@ -9,10 +9,8 @@ const Content = styled.footer`
   display: flex;
   flex-direction: column;
 
-  max-width: 1440px;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
 `;
 
 const NavSection = styled.div`
