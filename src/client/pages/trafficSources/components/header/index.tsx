@@ -1,4 +1,4 @@
-import { Button, useModal } from "@arkyn/components";
+import { Button, Tooltip, useModal } from "@arkyn/components";
 import { Plus } from "lucide-react";
 import { Container } from "./styles";
 
@@ -8,9 +8,15 @@ function Header() {
   return (
     <Container>
       <h1>Traffic sources</h1>
-      <Button leftIcon={Plus} onClick={openModal}>
-        Add traffic source
-      </Button>
+
+      <Tooltip
+        text="Your plan does not allow you to add traffic sources. Please upgrade to add traffic sources."
+        orientation="left"
+      >
+        <Button leftIcon={Plus} onClick={openModal} disabled>
+          Add traffic source
+        </Button>
+      </Tooltip>
     </Container>
   );
 }
