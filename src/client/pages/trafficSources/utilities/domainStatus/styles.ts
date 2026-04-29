@@ -4,8 +4,12 @@ const Container = styled.span`
   cursor: help;
 
   .arkynBadge {
-    min-width: 70px;
-    max-width: 70px;
+    min-width: 80px;
+    max-width: 80px;
+  }
+
+  .arkynTooltipText {
+    line-height: 130% !important;
   }
 
   @keyframes pulse {

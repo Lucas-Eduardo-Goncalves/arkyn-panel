@@ -47,7 +47,7 @@ function TrafficSourcesPage() {
         {entriesSources
           .sort((a, b) => a[0].localeCompare(b[0]))
           .map(([category, trafficSources]) => (
-            <GridContainer>
+            <GridContainer key={category}>
               <h2>{category}</h2>
               <Divider />
               {trafficSources

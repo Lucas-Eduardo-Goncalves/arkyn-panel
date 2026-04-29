@@ -3,6 +3,7 @@ import { type RouteConfig, index, layout, route } from "@react-router/dev/routes
 export default [
   index("./main/routes/_index.ts"),
 
+  route("api/health-check", "./main/routes/api.healthCheck.ts"),
   route("api/logout-user", "./main/routes/api.logoutUser.ts"),
   
   layout("./main/routes/layout.signLayout.tsx", [ 

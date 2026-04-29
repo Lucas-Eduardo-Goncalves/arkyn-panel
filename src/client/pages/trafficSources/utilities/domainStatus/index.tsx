@@ -6,7 +6,7 @@ type DomainStatusProps = {
   domain: string;
 };
 
-type Status = "idle" | "online" | "offline";
+type Status = "idle" | "online" | "offline" | "not-found";
 
 function CheckStatus({ domain }: DomainStatusProps) {
   const [status, setStatus] = useState<Status>("idle");
@@ -17,17 +17,11 @@ function CheckStatus({ domain }: DomainStatusProps) {
 
   async function checkDomainStatus() {
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-      await fetch(domain + "/health-check", {
-        method: "HEAD",
-        mode: "no-cors",
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-      setStatus("online");
+      const response = await fetch(
+        `/api/health-check?domain=${encodeURIComponent(domain)}`,
+      );
+      const data = await response.json();
+      setStatus(data.status);
     } catch {
       setStatus("offline");
     }
@@ -37,23 +31,27 @@ function CheckStatus({ domain }: DomainStatusProps) {
     idle: <Badge scheme="secondary">Checking</Badge>,
     online: <Badge scheme="success">Online</Badge>,
     offline: <Badge scheme="danger">Offline</Badge>,
+    "not-found": <Badge scheme="warning">Not Found</Badge>,
   };
 
   return statusConfig[status];
 }
 
 function DomainStatus(props: DomainStatusProps) {
+  const tooltipText = `Status of your traffic source in real time: <br/><br/>
+  - Online: Your traffic source is active and responding. <br/>
+  - Offline: Your traffic source is not responding. <br/>
+  - Not Found: The domain could not be reached. <br/>
+  - Checking: The system is currently checking the status of your traffic source.`;
+
   return (
-    <Tooltip
-      orientation="right"
-      text="Status of your traffic source in real time"
-    >
-      <Container>
+    <Container>
+      <Tooltip orientation="right" text={tooltipText}>
         <ClientOnly fallback={<Badge scheme="secondary">Checking</Badge>}>
           {() => <CheckStatus domain={props.domain} />}
         </ClientOnly>
-      </Container>
-    </Tooltip>
+      </Tooltip>
+    </Container>
   );
 }
 
